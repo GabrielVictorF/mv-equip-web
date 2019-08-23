@@ -1,0 +1,27 @@
+<table class="striped highlight responsive-table centered">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>
+                <i class="material-icons">date_range</i> Data de empréstimo
+            </th>
+            <th>
+                <i class="material-icons">person</i> Nome do solicitante           
+                </th>
+                <th>
+                    <i class="material-icons">remove_red_eye</i> Destino  
+                </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let x of emprestimos; let i = index" [routerLink]="['/detalhe', x.emprestimo_id]">
+            <td>{{ i+1 }}</td>
+            <td>{{x.data_emprestimo_format}}</td>
+            <td>{{ x.solicitante_nome }}</td>
+            <td>
+                <span *ngIf="x.localizacao_nome">{{ x.localizacao_nome}}</span>
+                <span *ngIf="x.orgao_sigla">{{ x.orgao_sigla }}</span>
+            </td>
+        </tr>
+    </tbody>
+</table>    
