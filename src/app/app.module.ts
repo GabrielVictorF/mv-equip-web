@@ -12,6 +12,9 @@ import { RelatoriosComponent } from './pages/relatorios/relatorios.component';
 import { DetalheComponent } from './pages/detalhe/detalhe.component';
 import { NovoEmprestimoComponent } from './pages/novo-emprestimo/novo-emprestimo.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
+import { FooterComponent } from './pages/footer/footer.component';
+import { FunctionsService } from './services/functions.service';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -22,14 +25,16 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
     RelatoriosComponent,
     DetalheComponent,
     NovoEmprestimoComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [FunctionsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
