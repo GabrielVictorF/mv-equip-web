@@ -18,8 +18,8 @@ const routes: Routes = [
   { path: 'detalhe/:emprestimo_id', component: DetalheComponent },
   { path: 'novo-emprestimo', component: NovoEmprestimoComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  {path: '404', component: NotFoundComponent},
-  {path: '**', redirectTo: '/404'}
+  { path: '404', component: NotFoundComponent },
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({

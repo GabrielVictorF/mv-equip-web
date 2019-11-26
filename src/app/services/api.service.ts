@@ -25,9 +25,21 @@ export class ApiService {
     return this.http.get(url, this.httpOptions);
   }
 
-  public getEmprestimos(emprestimoId?) {
+  public getEmprestimos(emprestimoId?, data_emprestimo?) {
     let url = this.url + '/_QUERIES/get/emprestimo-full-relacionamento'
     if (emprestimoId) url += '?emprestimoId=' + emprestimoId;
+    if (data_emprestimo) url += '?data_emprestimo=' + data_emprestimo;
+    return this.http.get(url, this.httpOptions);
+  }
+
+  public getLocalizacoes() {
+    let url = this.url + '/mv_equip/public/localizacao';
+    console.log(url);
+    return this.http.get(url, this.httpOptions);
+  }
+
+  public getCountSolicitanteEmprestimo() {
+    let url = this.url + '/_QUERIES/get/count-emprestimo-solicitante';
     return this.http.get(url, this.httpOptions);
   }
 }

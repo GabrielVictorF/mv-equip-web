@@ -1,5 +1,6 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler, Injectable } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -16,6 +17,26 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { FunctionsService } from './services/functions.service';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
+import { FormsModule } from '@angular/forms';
+
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({
+  dsn: "https://38ce6f73d3f54904a34f3ff23be63bed@sentry.io/1544250"
+});
+
+@Injectable()
+export class SentryErrorHandler implements ErrorHandler {
+  constructor() {
+  }
+  handleError(error) {
+    const eventId = Sentry.captureException(error.originalError || error);
+    sessionStorage.setItem('sentry-error-ev-id', eventId);
+    console.log(eventId)
+  }
+}
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,11 +51,13 @@ import { NotFoundComponent } from './pages/not-found/not-found.component';
     NotFoundComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [FunctionsService],
+  providers: [{provide: ErrorHandler, useClass: SentryErrorHandler}, FunctionsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,36 +1,69 @@
-<div *ngIf="emprestimo == undefined">
-    <div [class]="statusEmp.progress">
-        <div [class]="statusEmp.indeterminate"></div>
+<div class="container">
+    <form (ngSubmit)="pesquisar(p)">
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field col s12">
+                    <input type="text" class="datepicker" id="calendar" name="data_emprestimo">
+                    <label for="calendar">Data de empréstimo</label>
+                </div>
+            </div>
+        </div>
+        <input type="text" [(ngModel)]="pesquisa.data_emprestimo" name="a">
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field col s12">
+                    <select>
+                        <option value="" [(ngModel)]="pesquisa.solicitante" disabled selected>Solicitante</option>
+                        <option>a</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12">
+                <button class="btn waves-effect waves-light" type="submit" (click)="pesquisar()">Pesquisar
+                    <i class="material-icons right">search</i>
+                </button>
+            </div>
+        </div>
+    </form>
+
+    <div *ngIf="emprestimo == undefined">
+        <div [class]="statusEmp.progress">
+            <div [class]="statusEmp.indeterminate"></div>
+        </div>
     </div>
-</div>
-<table class="striped highlight responsive-table centered" *ngIf="emprestimos?.length >  0; else semRegistros">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>
-                <i class="material-icons">date_range</i> Data de empréstimo
-            </th>
-            <th>
-                <i class="material-icons">person</i> Nome do solicitante           
+    <table class="striped highlight responsive-table centered" *ngIf="emprestimos?.length >  0; else semRegistros">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>
+                    <i class="material-icons">date_range</i> Data de empréstimo
                 </th>
                 <th>
-                    <i class="material-icons">remove_red_eye</i> Destino  
+                    <i class="material-icons">person</i> Nome do solicitante
                 </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let x of emprestimos; let i = index" [routerLink]="['/detalhe', x.emprestimo_id]">
-            <td>{{ i+1 }}</td>
-            <td>{{x.data_emprestimo_format}}</td>
-            <td>{{ x.solicitante_nome }}</td>
-            <td>
-                <span *ngIf="x.localizacao_nome">{{ x.localizacao_nome}}</span>
-                <span *ngIf="x.orgao_sigla">{{ x.orgao_sigla }}</span>
-            </td>
-        </tr>
-    </tbody>
-</table>   
+                <th>
+                    <i class="material-icons">remove_red_eye</i> Destino
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let x of emprestimos; let i = index" [routerLink]="['/detalhe', x.emprestimo_id]"
+                (click)="dataService.data = x">
+                <td>{{ i+1 }}</td>
+                <td>{{x.data_emprestimo_format}}</td>
+                <td>{{ x.solicitante_nome }}</td>
+                <td>
+                    <span *ngIf="x.localizacao_nome">{{ x.localizacao_nome}}</span>
+                    <span *ngIf="x.orgao_sigla">{{ x.orgao_sigla }}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 
-<ng-template #semRegistros>
-    <h1>Nenhum resultado encontrado</h1>
-</ng-template>
+    <ng-template #semRegistros>
+        <h1>Nenhum resultado encontrado</h1>
+    </ng-template>
+</div>

@@ -8,13 +8,7 @@ declare var $;
 })
 export class AppComponent {
   constructor() {
-    document.addEventListener('DOMContentLoaded', function() {
-      var elems = document.querySelectorAll('.dropdown-trigger');
-      let options = {
-        hover: true
-      }
-      var instances = M.Dropdown.init(elems, options);
-    });
+    
   }
 }
   

@@ -1,1 +1,18 @@
-<p>relatorios works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col s12 center-align">
+            <button class="btn waves-effect waves-light" type="submit" (click)="gerarRelatorio(1)">Empréstimo por tipo
+                <i class="material-icons right">assessment</i>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+            <div class="col s12 center-align">
+                <button class="btn waves-effect waves-light" type="submit" (click)="gerarRelatorio(2)">Empréstimo por usuário
+                    <i class="material-icons right">person_pin</i>
+                </button>
+            </div>
+        </div>
+</div>
+
+<div id="chartDiv" class="relatorios"></div>

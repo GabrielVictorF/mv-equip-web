@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ThrowStmt } from '@angular/compiler';
+
+import { ApiService } from '../../services/api.service';
+import { FunctionsService } from '../../services/functions.service';
 
 @Component({
   selector: 'app-novo-emprestimo',
@@ -6,53 +10,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./novo-emprestimo.component.scss']
 })
 export class NovoEmprestimoComponent implements OnInit {
-
-  constructor() { }
+  @Input() localizacoes;
+  constructor(public api: ApiService, public functions: FunctionsService) {}
 
   ngOnInit() {
-    document.addEventListener('DOMContentLoaded', function() {
-      let options = {
-        format: 'dd/mmmm/yyyy',
-        date: new Date(),
-        setDefaultDate: true,
-        i18n: {
-          months: [
-            'Janeiro',
-            'Fevereiro',
-            'Março',
-            'Abril',
-            'Maio',
-            'Junho',
-            'Julho',
-            'Agosto',
-            'Setembro',
-            'Outubro',
-            'Novembro',
-            'Dezembro'
-          ],
-          monthsShort: [
-            'Janeiro',
-            'Fevereiro',
-            'Março',
-            'Abril',
-            'Maio',
-            'Junho',
-            'Julho',
-            'Agosto',
-            'Setembro',
-            'Outubro',
-            'Novembro',
-            'Dezembro'
-          ],
-          weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-          weekdaysShort: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
-          weekdaysAbbrev: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S']
-        }
-      }
-      var elems = document.querySelectorAll('.datepicker');
-      var instances = M.Datepicker.init(elems, options);
-      console.log(instances)
+      this.functions.initCalendar();
+      this.functions.initSelect();
+      this.getLocalizacoes();
+  }
+  
+  private getLocalizacoes() {
+    this.api.getLocalizacoes().subscribe(res => {
+      this.localizacoes = res;
+      console.log(this.localizacoes)
     });
   }
-
 }

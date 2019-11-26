@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../services/api.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-detalhe',
@@ -9,17 +10,11 @@ import { ApiService } from '../../services/api.service';
 })
 export class DetalheComponent implements OnInit {
   public emprestimo;
-  constructor(private route: ActivatedRoute, private api: ApiService) { }
+  constructor(private route: ActivatedRoute, private api: ApiService, private dataService: DataService) { }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      let parametro = params.get('emprestimo_id');
-      console.log(parametro)
-      this.api.getEmprestimos(parametro).subscribe(res => {
-       this.emprestimo = res;
-        console.log(this.emprestimo);
-      });
-    })
+    this.emprestimo = this.dataService.data;
+    console.log(this.emprestimo)
   }
 
 }

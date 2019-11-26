@@ -1,6 +1,14 @@
 <ul class="collection with-header">
-    <li class="collection-header">
-        <i class="material-icons left">date_range</i>
-        <strong>Data de empréstimo:</strong>{{ emprestimo?.data_emprestimo_format }}</li>
+        <li class="collection-header">
+                <i class="material-icons left">date_range</i>
+                <strong>Data de empréstimo:</strong>{{ emprestimo?.data_emprestimo_format }}
+        </li>
+        <li class="collection-header">
+                <i class="material-icons left">date_range</i>
+                <strong>Data de devolucao:</strong>{{ emprestimo?.data_emprestimo_devolucao }}
+        </li>
+        <li class="collection-header">
+                <i class="material-icons left">person</i>
+                <strong>Solicitante:</strong>{{ emprestimo?.solicitante_nome }}
+        </li>
 </ul>
-{{emprestimo?.localizacao_id}}
